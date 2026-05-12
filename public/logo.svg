@@ -1,0 +1,53 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bubbleGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1e3a8a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0ea5e9;stop-opacity:1" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="15" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+  
+  <!-- Chat Bubble -->
+  <path d="M128 64C84.9219 64 48 98.9219 48 142V352C48 395.078 84.9219 430 128 430H150L100 480V430H384C427.078 430 464 395.078 464 352V142C464 98.9219 427.078 64 384 64H128Z" fill="url(#bubbleGradient)" />
+  
+  <!-- Inner Glow/Shine -->
+  <circle cx="400" cy="112" r="60" fill="white" fill-opacity="0.1" filter="url(#glow)" />
+
+  <!-- Brain Network -->
+  <g stroke="white" stroke-width="2" stroke-opacity="0.6">
+    <!-- Connections -->
+    <line x1="256" y1="160" x2="200" y2="200" />
+    <line x1="256" y1="160" x2="312" y2="200" />
+    <line x1="200" y1="200" x2="180" y2="260" />
+    <line x1="200" y1="200" x2="256" y2="240" />
+    <line x1="312" y1="200" x2="332" y2="260" />
+    <line x1="312" y1="200" x2="256" y2="240" />
+    <line x1="180" y1="260" x2="220" y2="320" />
+    <line x1="256" y1="240" x2="220" y2="320" />
+    <line x1="256" y1="240" x2="292" y2="320" />
+    <line x1="332" y1="260" x2="292" y2="320" />
+    <line x1="220" y1="320" x2="256" y2="360" />
+    <line x1="292" y1="320" x2="256" y2="360" />
+    
+    <!-- Cross connections -->
+    <line x1="200" y1="200" x2="312" y2="200" />
+    <line x1="180" y1="260" x2="332" y2="260" />
+    <line x1="256" y1="160" x2="256" y2="240" />
+  </g>
+
+  <!-- Nodes -->
+  <g fill="white">
+    <circle cx="256" cy="160" r="6" />
+    <circle cx="200" cy="200" r="6" />
+    <circle cx="312" cy="200" r="6" />
+    <circle cx="256" cy="240" r="8" fill-opacity="0.9" /> <!-- Center node -->
+    <circle cx="180" cy="260" r="5" />
+    <circle cx="332" cy="260" r="5" />
+    <circle cx="220" cy="320" r="5" />
+    <circle cx="292" cy="320" r="5" />
+    <circle cx="256" cy="360" r="6" />
+  </g>
+</svg>

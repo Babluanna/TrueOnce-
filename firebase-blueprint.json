@@ -1,0 +1,114 @@
+{
+  "entities": {
+    "AppConfig": {
+      "title": "App Configuration",
+      "description": "Global settings for the application managed by admins.",
+      "type": "object",
+      "properties": {
+        "appName": { "type": "string" },
+        "appIcon": { "type": "string" },
+        "isJailbreakMode": { "type": "boolean" },
+        "geminiApiKey": { "type": "string" },
+        "features": {
+          "type": "object",
+          "properties": {
+            "webBuilder": { "type": "boolean" },
+            "chat": { "type": "boolean" },
+            "feedback": { "type": "boolean" }
+          }
+        },
+        "uiTheme": { "type": "string", "enum": ["dark", "light", "system"] }
+      },
+      "required": ["appName", "isJailbreakMode", "features"]
+    },
+    "UserProfile": {
+      "title": "User Profile",
+      "description": "Information about a user including their role and usage statistics.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string" },
+        "displayName": { "type": "string" },
+        "photoURL": { "type": "string" },
+        "role": { "type": "string", "enum": ["admin", "user"] },
+        "createdAt": { "type": "number" },
+        "lastLogin": { "type": "number" },
+        "usageStartTime": { "type": "number" },
+        "totalUsageMs": { "type": "number" },
+        "isLocked": { "type": "boolean" },
+        "lockedAt": { "type": "number" }
+      },
+      "required": ["uid", "email", "role"]
+    },
+    "UserFeedback": {
+      "title": "User Feedback",
+      "description": "Feedback sent by users to the support email.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "userEmail": { "type": "string" },
+        "message": { "type": "string" },
+        "timestamp": { "type": "number" }
+      },
+      "required": ["userId", "userEmail", "message", "timestamp"]
+    },
+    "UsageLog": {
+      "title": "Usage Log",
+      "description": "Logs of user prompts for admin monitoring.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "userEmail": { "type": "string" },
+        "prompt": { "type": "string" },
+        "timestamp": { "type": "number" },
+        "mode": { "type": "string", "enum": ["chat", "webbuilder"] }
+      },
+      "required": ["userId", "prompt", "timestamp"]
+    },
+    "AdminAuditLog": {
+      "title": "Admin Audit Log",
+      "description": "Records of administrative actions taken by admins.",
+      "type": "object",
+      "properties": {
+        "adminId": { "type": "string" },
+        "adminEmail": { "type": "string" },
+        "action": { "type": "string" },
+        "target": { "type": "string" },
+        "details": { "type": "string" },
+        "timestamp": { "type": "number" }
+      },
+      "required": ["adminId", "adminEmail", "action", "timestamp"]
+    }
+  },
+  "firestore": {
+    "config/main": {
+      "schema": "AppConfig",
+      "description": "The main global configuration document."
+    },
+    "users/{userId}": {
+      "schema": "UserProfile",
+      "description": "User profile document."
+    },
+    "feedback/{feedbackId}": {
+      "schema": "UserFeedback",
+      "description": "Feedback collection."
+    },
+    "logs/{logId}": {
+      "schema": "UsageLog",
+      "description": "Activity logs for monitoring."
+    },
+    "audit_logs/{logId}": {
+      "schema": "AdminAuditLog",
+      "description": "Administrative audit logs."
+    },
+    "users/{userId}/conversations/{convId}": {
+      "schema": "object",
+      "description": "User conversation sessions."
+    },
+    "users/{userId}/conversations/{convId}/messages/{msgId}": {
+      "schema": "ChatMessage",
+      "description": "Messages within a conversation."
+    }
+  }
+}
